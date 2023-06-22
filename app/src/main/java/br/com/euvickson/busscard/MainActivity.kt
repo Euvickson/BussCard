@@ -5,7 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -18,9 +17,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CardElevation
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -45,7 +44,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-
+                    CreateBusCard()
                 }
             }
         }
@@ -74,10 +73,32 @@ fun CreateBusCard() {
 
                 CreateImageProfile()
                 Divider()
+                CreateInfo()
 
+                Button(
+                    onClick = {}) {
+                    Text(
+                        text = "Portfolio",
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                }
             }
         }
     }
+}
+
+@Composable
+private fun CreateInfo() {
+    Text(
+        text = "Miles P.",
+        style = MaterialTheme.typography.headlineLarge,
+        color = MaterialTheme.colorScheme.primary
+    )
+    Text(
+        text = "@themilesCompose",
+        modifier = Modifier.padding(3.dp),
+        style = MaterialTheme.typography.bodyLarge
+    )
 }
 
 @Composable
