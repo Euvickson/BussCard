@@ -5,9 +5,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -32,8 +34,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import br.com.euvickson.busscard.ui.theme.BussCardTheme
@@ -106,7 +110,8 @@ fun Content() {
     Box(modifier = Modifier
         .fillMaxHeight()
         .fillMaxWidth()
-        .padding(5.dp)) {
+        .padding(5.dp)
+    ) {
         Surface(modifier = Modifier
             .padding(3.dp)
             .fillMaxWidth()
@@ -124,7 +129,23 @@ fun Content() {
 fun Portfolio(data: List<String>) {
     LazyColumn() {
         items (data.size) { index ->
-            Text(data[index])
+            Card(modifier = Modifier
+                .padding(13.dp)
+                .fillMaxWidth(),
+            shape = RectangleShape,
+            elevation = CardDefaults.cardElevation(4.dp)) {
+                Row(modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp)
+                    .background(MaterialTheme.colorScheme.surface)
+                    .padding(7.dp)) {
+                    CreateImageProfile(modifier = Modifier.size(100.dp))
+                    Column(modifier = Modifier.padding(7.dp).align(alignment = Alignment.CenterVertically)) {
+                        Text(text = data[index], fontWeight = FontWeight.Bold)
+                        Text(text = "A Great Project", style = MaterialTheme.typography.bodySmall)
+                    }
+                }
+            }
         }
     }
 }
@@ -157,7 +178,7 @@ private fun CreateImageProfile(modifier: Modifier = Modifier) {
         Image(
             painter = painterResource(id = R.drawable.profile_image),
             contentDescription = "Profile Image",
-            modifier = Modifier.size(135.dp),
+            modifier = modifier.size(135.dp),
             contentScale = ContentScale.Crop
         )
     }
